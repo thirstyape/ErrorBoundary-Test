@@ -1,0 +1,29 @@
+﻿<div class="tabs is-centered is-boxed is-size-5">
+	<ul>
+		@foreach (var tab in Tabs)
+		{
+			<li class="@GetClass(tab.Key)" @onclick="(() => OnTabBarChanged(tab.Key))">
+				<a>
+					<span class="material-icons pr-1" aria-hidden="true">@tab.Value</span> @tab.Key
+				</a>
+			</li>
+		}
+	</ul>
+</div>
+
+<CascadingValue Value="this">
+	@ChildContent
+</CascadingValue>
+
+@code {
+	protected override void OnInitialized()
+	{
+		if (string.IsNullOrWhiteSpace(Active) && Tabs.Count > 0)
+		{
+			Active = Tabs.First().Key;
+			StateHasChanged();
+		}
+
+		Tabs.Add("Click me", ""); // Not sure why, but I needed to add this
+	}
+}

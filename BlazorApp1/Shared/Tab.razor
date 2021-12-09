@@ -1,0 +1,26 @@
+﻿@if (IsActive && ChildContent != null)
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [CascadingParameter]
+    private TabBar Parent { get; set; }
+
+    protected override void OnInitialized()
+    //protected override void OnParametersSet() // Changing to this will cause the issue
+    {
+        Parent.Tabs.Add(Name, Icon);
+    }
+
+    private bool IsActive => Parent.Active == Name;
+}
