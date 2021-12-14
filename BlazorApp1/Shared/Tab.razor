@@ -20,6 +20,7 @@
     //protected override void OnParametersSet() // Changing to this will cause the issue
     {
         Parent.Tabs.Add(Name, Icon);
+        Parent.Tabs.Add(Name, Icon);
     }
 
     private bool IsActive => Parent.Active == Name;

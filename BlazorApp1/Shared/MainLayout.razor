@@ -11,14 +11,24 @@
         </div>
 
         <article class="content px-4">
-            <ErrorBoundary>
+            <ErrorBoundary @ref=boundary>
                 <ChildContent>
                     @Body
                 </ChildContent>
                 <ErrorContent>
                     <p>Failed</p>
+                    <button type="button" @onclick=OnClickReset>Reset</button>
                 </ErrorContent>
             </ErrorBoundary>
         </article>
     </main>
 </div>
+
+@code {
+    private ErrorBoundary boundary;
+
+    private void OnClickReset()
+    {
+        boundary?.Recover();
+    }
+}
